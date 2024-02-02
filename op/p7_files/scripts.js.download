@@ -1,0 +1,1875 @@
+/*===================================
+Author       : CreativeMultimedia.
+Template Name: Creative Multimedia Theme
+Version      : 1.0
+===================================*/
+
+/*===================================*
+PAGE JS
+*===================================*/
+
+(function($) {
+	'use strict';
+	
+	/*===================================*
+	01. LOADING JS
+	/*===================================*/
+	// $(window).on('load', function() {
+	// 	var preLoder = $("#preloader");
+	// 	preLoder.delay(700).fadeOut(500).addClass('loaded');
+	// });
+	setTimeout(function(){
+		var preLoder = $("#preloader");
+		preLoder.delay(300).fadeOut(500).addClass('loaded');
+	},5);
+
+	/*===================================*
+	02. SMOOTH SCROLLING JS
+	*===================================*/
+	// Select all links with hashes
+	var headerHeight = $(".header_wrap").height() - 65;
+    $('a.page-scroll').on('click', function(event) {
+        // On-page links
+        if ( location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname ) {
+          // Figure out element to scroll to
+          var target = $(this.hash),
+              speed= $(this).data("speed") || 800;
+              target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+
+          // Does a scroll target exist?
+          if (target.length) {
+            // Only prevent default if animation is actually gonna happen
+            event.preventDefault();
+            $('html, body').animate({
+              scrollTop: target.offset().top - headerHeight
+            }, speed);
+          }
+        }
+    });
+	
+	$(window).on("load resize ready",function () {
+		$(".header_wrap.fixed-top").css({"padding-top": $(".alertbox").height() });
+	})
+	$('.alertbox .close').on("click",function () {
+		$(".header_wrap ").css({"padding-top": "0" });
+	})
+
+	$(function () {
+		if ($('.header_wrap').hasClass('fixed-top')) {
+			$('.alertbox').addClass('alert_fixed');
+		}
+	});
+	
+	/*===================================*
+	03. MENU JS
+	*===================================*/
+	//Main navigation scroll spy for shadow
+	$(window).on('scroll', function() {
+		var scroll = $(window).scrollTop();
+
+	    if (scroll >= 80) {
+	        $('header').addClass('nav-fixed');
+			$('.alert_fixed').addClass('fixed');
+	    } else {
+	        $('header').removeClass('nav-fixed');
+			$('.alert_fixed').removeClass('fixed');;
+	    }
+
+	});
+	
+	//Show Hide dropdown-menu Main navigation 
+	$( document ).ready( function () {
+		$( '.dropdown-menu a.dropdown-toggler' ).on( 'click', function ( e ) {
+			var $el = $( this );
+			var $parent = $( this ).offsetParent( ".dropdown-menu" );
+			if ( !$( this ).next().hasClass( 'show' ) ) {
+				$( this ).parents( '.dropdown-menu' ).first().find( '.show' ).removeClass( "show" );
+			}
+			var $subMenu = $( this ).next( ".dropdown-menu" );
+			$subMenu.toggleClass( 'show' );
+			
+			$( this ).parent( "li" ).toggleClass( 'show' );
+	
+			$( this ).parents( 'li.nav-item.dropdown.show' ).on( 'hidden.bs.dropdown', function ( e ) {
+				$( '.dropdown-menu .show' ).removeClass( "show" );
+			} );
+			
+			return false;
+		});
+	});
+	
+	//Hide Navbar Dropdown After Click On Links
+	var navBar = $(".header_wrap");
+	var navbarLinks = navBar.find(".navbar-collapse ul li a.page-scroll");
+
+    $.each( navbarLinks, function( i, val ) {
+
+      var navbarLink = $(this);
+
+        navbarLink.on('click', function () {
+          navBar.find(".navbar-collapse").collapse('hide');
+		  $("header").removeClass("active");
+        });
+
+    });
+	
+	//Main navigation Active Class Add Remove
+	$('.navbar-toggler').on('click', function() {
+		$("header").toggleClass("active");
+	});	
+	
+	$(window).on("load resize ready",function () {
+	function getClass(element, startsWith) {
+
+		var result = undefined;
+		$(element.attr('class').split(' ')).each(function() {
+
+			if (this.indexOf(startsWith) > -1) result = this;
+		});
+		return result;
+	}
+	$('.header_wrap').each(function() {
+		var className = getClass( $(this), 'bg_') || getClass( $(this), 'bg-');
+		if($('.header_wrap').hasClass(className))
+		{
+			Array.prototype.forEach.call(document.querySelectorAll(".dropdown-menu"), function(el) {
+				el.classList.add(className);
+			});
+		}
+		if ($(window).width() <= 992){
+			$('.navbar-nav').addClass(className);
+		}
+	});
+	});
+
+	/*===================================*
+	04. SEARCH JS
+	*===================================*/
+    $(".search_trigger").on("click", function() {
+		$(".search-overlay").toggleClass('open');
+		$(".search_trigger").toggleClass('open');
+	});
+	
+	/*===================================*
+	05. SLIDER JS
+	*===================================*/
+	$( window ).on( "load", function() {
+		$('.carousel_slider').each( function() {
+			var $carousel = $(this);
+			$carousel.owlCarousel({
+				dots : $carousel.data("dots"),
+				loop : $carousel.data("loop"),
+				margin: $carousel.data("margin"),
+				items: $carousel.data("items"),
+				mouseDrag: $carousel.data("mouse-drag"),
+				touchDrag: $carousel.data("touch-drag"),
+				center: $carousel.data("center"),
+				autoHeight: $carousel.data("autoheight"),
+				rewind: $carousel.data("rewind"),
+				nav: $carousel.data("nav"),
+				navText: ['<i class="ion-ios-arrow-back"></i>', '<i class="ion-ios-arrow-forward"></i>'],
+				autoplay : $carousel.data("autoplay"),
+				animateIn : $carousel.data("animate-in"),
+				animateOut: $carousel.data("animate-out"),
+				autoplayTimeout : $carousel.data("autoplay-timeout"),
+				smartSpeed: $carousel.data("smart-speed"),
+				responsive: $carousel.data("responsive")
+			});
+		});
+	});
+	
+	/*===================================*
+	05. Main SLIDER JS
+	*===================================*/
+	
+	$(document).ready(function(){
+
+		$('#main_banner').owlCarousel({
+			loop:true,
+			margin:10,
+			nav:true,
+			dots:false,
+			autoplay: true,
+			mouseDrag:false,
+			autoplayTimeout:5000,
+			autoplayHoverPause:true,
+			smartSpeed:1000,			
+			animateIn:'fadeIn',
+			animateOut:'fadeOut',
+			navText: ['<i class="fas fa-chevron-left"></i>','<i class="fas fa-chevron-right"></i>'],
+			responsive:{
+			    0:{
+				   nav:false,
+				   touchDrag:true,
+				   items:1
+			    },
+			    600:{
+				   items:1
+			    },
+			    1000:{
+				   items:1
+			    }
+			}
+		 })
+
+	});
+
+	/*===================================*
+	06. PORTFOLIO JS
+	*===================================*/
+
+	var $grid_selectors  = $(".grid_container");
+    var filter_selectors = ".grid_filter > li > a";
+	if( $grid_selectors.length > 0 ) {
+		$grid_selectors.imagesLoaded(function(){
+			if ($grid_selectors.hasClass("masonry")){
+				$grid_selectors.isotope({
+					itemSelector: '.grid_item',
+					layoutMode: "masonry",
+					masonry: {
+						columnWidth: '.grid-sizer'
+					},
+					filter: "*"
+				});
+			} 
+			else {
+				$grid_selectors.isotope({
+					itemSelector: '.grid_item',
+					layoutMode: "fitRows",
+					filter: "*"
+				});
+			}
+		});
+	}
+            
+	//isotope filter
+	$(document).on( "click", filter_selectors, function() {
+		$(filter_selectors).removeClass("current");
+		$(this).addClass("current");
+		var dfselector = $(this).data('filter');
+		if ($grid_selectors.hasClass("masonry")){
+			$grid_selectors.isotope({
+				itemSelector: '.grid_item',
+				layoutMode: "masonry",
+				masonry: {
+					columnWidth: '.grid_item'
+				},
+				filter: dfselector
+			});
+		} 
+		else {
+			$grid_selectors.isotope({
+				itemSelector: '.grid_item',
+				layoutMode: "fitRows",
+				filter: dfselector
+			});
+		}
+		return false;
+	});
+	
+
+	$(window).resize(function () {
+		if( $grid_selectors.length > 0 ) {
+			$grid_selectors.ready(function () {
+				setTimeout(function () {
+					$grid_selectors.find('.grid_item').removeClass('animation').removeClass('animated'); // avoid problem to filter after window resize
+					$grid_selectors.isotope('layout');
+				}, 300);
+			});
+		}
+	});
+	
+	$('.grid_item .image_popup').on('click', function () {
+		$(this).parent('.link_container').magnificPopup('open');
+	});
+	$('.link_container').each(function () {
+		$(this).magnificPopup({
+			delegate: '.image_popup',
+			type: 'image',
+			gallery: {
+				enabled: true
+			}
+		});
+	});
+	 
+	/*===================================*
+     07.COUNTDOWN JS
+    *===================================*/
+    $('.countdown_time').each(function() {
+        var endTime = $(this).data('time');
+        $(this).countdown(endTime, function(tm) {
+            $(this).html(tm.strftime('<span class="countdown_box"><span class="countdown days">%D </span><span class="cd_text">Days</span></span><span class="countdown_box"><span class="countdown hours">%H</span><span class="cd_text">Hours</span></span><span class="countdown_box"><span class="countdown minutes">%M</span><span class="cd_text">Minutes</span></span><span class="countdown_box"><span class="countdown seconds">%S</span><span class="cd_text">Seconds</span></span>'));
+        });
+    });
+	
+	/*===================================*
+	08. CONTACT FORM JS
+	*===================================*/
+	// $("#submitButton").on("click", function(event) {
+	//     event.preventDefault();
+	//     var mydata = $("form").serialize();
+	//     $.ajax({
+	//         type: "POST",
+	//         dataType: "json",
+	//         url: "contact.php",
+	//         data: mydata,
+	//         success: function(data) {
+	//             if (data.type === "error") {
+	//                 $("#alert-msg").removeClass("alert-msg-success");
+	//                 $("#alert-msg").addClass("alert-msg-failure");
+	//             } else {
+	//                 $("#alert-msg").addClass("alert-msg-success");
+	//                 $("#alert-msg").removeClass("alert-msg-failure");
+	//                 $("#first-name").val("Enter Name");
+	//                 $("#email").val("Enter Email");
+	// 				$("#phone").val("Enter Phone Number");
+	//                 $("#subject").val("Enter Subject");
+	//                 $("#description").val("Enter Message");
+
+	//             }
+	//             $("#alert-msg").html(data.msg);
+	//             $("#alert-msg").show();
+	//         },
+	//         error: function(xhr, textStatus) {
+	//             alert(textStatus);
+	//         }
+	//     });
+	// });
+	
+	/*===================================*
+	09. SCROLLUP JS
+	*===================================*/
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 150) {
+			$('.scrollup').fadeIn();
+		} else {
+			$('.scrollup').fadeOut();
+		}
+	});
+	
+	$(".scrollup").on('click', function (e) {
+		e.preventDefault();
+		$('html, body').animate({
+			scrollTop: 0
+		}, 600);
+		return false;
+	});
+	
+	/*===================================*
+	10. POPUP JS
+	*===================================*/
+	$('.content-popup').magnificPopup({
+		type: 'inline',
+		preloader: true,
+		mainClass: 'mfp-zoom'
+	});
+	
+	$('.image_gallery').each(function() { // the containers for all your galleries
+		$(this).magnificPopup({
+			delegate: 'a', // the selector for gallery item
+			type: 'image',
+			gallery: {
+				enabled:true
+			},
+			zoom: {
+				enabled: true,
+				duration: 300, // don't foget to change the duration also in CSS
+				opener: function(element) {
+					return element.find('img');
+				}
+			}
+		});
+	});
+	
+	$(document).ready(function() {
+		$('.popup-ajax').magnificPopup({
+			type: 'ajax',
+		});
+	});
+
+	/*==============================================================
+    11. VIDEO JS
+    ==============================================================*/
+	$(document).ready(function() {
+		$('.video_popup, .iframe_popup').magnificPopup({
+			type: 'iframe',
+			mainClass: 'mfp-fade',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: false
+		});
+	});
+	
+	/*===================================*
+	12. ANIMATION JS
+	*===================================*/
+	$(function() {
+	
+		function ckScrollInit(items, trigger) {
+			items.each(function() {
+				var ckElement = $(this),
+					AnimationClass = ckElement.attr('data-animation'),
+					AnimationDelay = ckElement.attr('data-animation-delay');
+	
+				ckElement.css({
+					'-webkit-animation-delay': AnimationDelay,
+					'-moz-animation-delay': AnimationDelay,
+					'animation-delay': AnimationDelay,
+					opacity: 0
+				});
+	
+				var ckTrigger = (trigger) ? trigger : ckElement;
+	
+				ckTrigger.waypoint(function() {
+					ckElement.addClass("animated").css("opacity", "1");
+					ckElement.addClass('animated').addClass(AnimationClass);
+				}, {
+					triggerOnce: true,
+					offset: '90%',
+				});
+			});
+		}
+	
+		ckScrollInit($('.animation'));
+		ckScrollInit($('.staggered-animation'), $('.staggered-animation-wrap'));
+	
+	});
+	
+	/*===================================*
+	13. BACKGROUND IMAGE JS
+	*===================================*/
+	/*data image src*/
+	$(".background_bg").each(function() {
+		var attr = $(this).attr('data-img-src');
+		if (typeof attr !== typeof undefined && attr !== false) {
+			$(this).css('background-image', 'url(' + attr + ')');
+			$(this).css('background-position', 'center center');
+			$(this).css('background-size', 'cover');
+		}
+	});
+	
+	/*===================================*
+	14. PROGRESS BAR JS
+	*===================================*/
+	$(document).ready(function() {
+		$('.progress .progress-bar').css("width",
+			function() {
+				return $(this).attr("aria-valuenow") + "%";
+			}
+		)
+	
+		$('.count_pr').css("left",
+			function() {
+				return $(this).attr("data-percent") + "%";
+			}
+		)
+	});
+
+	/*===================================*
+	15. COUNTER JS
+	*===================================*/
+	$('.counter').counterUp({
+		time: 1500
+	});
+	
+	
+	/*===================================*
+	16. PARALLAX JS
+	*===================================*/
+	$(window).on('load', function() {
+        $('.parallax_bg').parallaxBackground();
+	});
+	
+	/*===================================*
+	17. RATING STAR JS
+	*===================================*/
+	$(document).ready(function(){
+	  
+	  $('.rating span').on('click', function(){
+			var onStar = parseFloat($(this).data('value'), 10); // The star currently selected
+			var stars = $(this).parent().children('.rating span');
+			for (var i = 0; i < stars.length; i++) {
+				$(stars[i]).removeClass('selected');
+			}
+			for (i = 0; i < onStar; i++) {
+				$(stars[i]).addClass('selected');
+			}
+		});
+	});
+	
+	//Demo js
+	// $( window ).on( "load", function() {
+	// 	document.onkeydown = function(e) {
+	// 		if(e.keyCode == 123) {
+	// 		 return false;
+	// 		}
+	// 		if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+	// 		 return false;
+	// 		}
+	// 		if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+	// 		 return false;
+	// 		}
+	// 		if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+	// 		 return false;
+	// 		}
+		
+	// 		if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+	// 		 return false;
+	// 		}      
+	// 	 }
+		 
+	// 	$("html").on("contextmenu",function(){
+	// 		return false;
+	// 	});
+	// });
+	
+	/*===================================*
+	DEMO SWITCHER JS
+	*===================================*/
+	
+	// $(document).ready( function() {
+	// 	$(window).on("load", function() {
+	// 		$('body').prepend('<div id="demo_content" class="demo_switcher"></div>');
+	// 		$("#demo_content").load("http://bestwebcreator.com/eduglobal/demo/demo.html");
+	// 	});
+	// });
+
+	/*===================================*
+	Tooltip
+	*===================================*/
+
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
+	/*===================================*
+	Multi Select
+	*===================================*/
+
+	$(document).ready(function() {
+		if($('.js-example-basic-multiple').length>0){
+			$('.js-example-basic-multiple').select2();
+		}
+	});
+
+
+	/*===================================*
+	accordion_header Tab Setting
+	*===================================*/
+
+	$(document).ready(function() {
+		
+		// $('.accordion_header > h6 > a').click(function(){
+
+		// 	$(this).parents('.accordion_header').toggleClass('active');
+			
+			
+		// 	if($(this).hasClass('collapsed'))
+		// 	{
+		// 		$('.project_work_filter .nav-link.active').toggleClass('active');
+		// 	}
+			
+
+		// });
+		if($("#google-reviews").length >0){
+			$("#google-reviews").googlePlaces({});
+		}
+	});
+
+
+	$('#certificate-form').submit(function(e){
+		e.preventDefault();
+		var formData = $('#certificate-form').serialize();
+		
+		$.ajax({
+			type:'POST',
+			url:site_url+'check-certificate',
+			data:formData,
+			dataType:'JSON',
+			beforeSend:function(){
+	            $('#certificate-form').find('.msg').html("Please Wailt..Processing..").show();
+	        },
+			success:function(data){
+				if(data.status==0){
+					$('#certificate-form').find('.msg').html(data.msg);
+				}else if(data.status==1){
+					window.location = site_url+'verify-certificate/y/'+data.certi_id;
+				}else if(data.status==2){
+					window.location = site_url+'verify-certificate/n/'+data.certi_id;
+				}else{
+					$('#certificate-form').find('.msg').html('Something Went Wrong.');
+				}
+			}
+		});
+	}) ;
+	$(document).ready(function(){
+		//course inquiry
+		$.validate({
+
+	    	form : '#inquiry-form',
+		    onSuccess : function(form) {
+		        $.ajax({
+		            url: site_url+'contact/course_inquiry_ajax',
+		            type: "post",
+		            data: $(form).serialize(),
+		            beforeSend:function(){
+			            $('#inquiry-form-err').html("Please Wait...Processing...");
+			            $('#inq-btn').attr("disabled",true);
+			        },
+			        success: function (response) {
+			            $('#inq-btn').attr("disabled",false);
+			        	if(response.trim()=="success"){
+			        		$('#inquiry').modal('hide');
+				            $('#inquiry-form-err').html("");
+				        	$('#thank-you-modal').modal('show');
+				        	$('#thank-you-msg').html(response);
+			        	}else{
+			            	$('#inquiry-form-err').html(response);
+
+			        	}
+			        	
+			        }, error: function (jqXHR, exception) {
+			            $('#inq-btn').attr("disabled",false);
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        $('#inquiry-form-err').html(msg);
+				    },           
+		        });
+		        return false;
+		    }
+		});
+		//college inquiry
+		$.validate({
+	    	form : '#clg-inquiry-form',
+		    onSuccess : function(form) {
+		        $.ajax({
+		            url: site_url+'contact/course_inquiry_ajax',
+		            type: "post",
+		            data: $(form).serialize(),
+		            beforeSend:function(){
+			            $('#clg-inquiry-form-err').html("Please Wait...Processing...");
+			            $('#clg-inq-btn').attr("disabled",true);
+			        },
+			        success: function (response) {
+			            $('#clg-inq-btn').attr("disabled",false);
+			        	if(response.trim()=="success"){
+			        		$('#college-inquiry').modal('hide');
+				            $('#clg-inquiry-form-err').html("");
+				        	$('#thank-you-modal').modal('show');
+				        	$('#thank-you-msg').html(response);
+			        	}else{
+			            	$('#clg-inquiry-form-err').html(response);
+
+			        	}
+			        	
+			        }, error: function (jqXHR, exception) {
+			            $('#clg-inq-btn').attr("disabled",false);
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        $('#clg-inquiry-form-err').html(msg);
+				    },           
+		        });
+		        return false;
+		    }
+		});
+		$.validate({
+	    	form : '#contact-form',
+	    });
+	})
+				
+	//visitor inquiry
+	// $('#inquiry-form').submit(function(evt){
+	//     evt.preventDefault();
+	//     var formData = $('#inquiry-form').serialize();
+	//     $.ajax({
+	//         url: site_url+'contact/course_inquiry_ajax',
+	//         type: 'POST',
+	//         data: formData,
+	//         beforeSend:function(){
+	//             $('#inquiry-form-err').html("Please Wait...Processing...");
+	//             $('#inq-btn').attr("disabled",true);
+	//         },
+	//         success: function (response) {
+	//             $('#inq-btn').attr("disabled",false);
+	//         	if(response.trim()=="success"){
+	//         		$('#inquiry').modal('hide');
+	// 	            $('#inquiry-form-err').html("");
+	// 	        	$('#thank-you-modal').modal('show');
+	// 	        	$('#thank-you-msg').html(response);
+	//         	}else{
+	//             	$('#inquiry-form-err').html(response);
+
+	//         	}
+	        	
+	//         }
+	//     });
+	//     return false;
+	// })
+	//password show/hide
+	$('.showOrHide').click(function(e){
+	    var target = e.currentTarget
+	    if($(target).hasClass('show')){
+	    	$(target).removeClass('show').addClass('hide')
+    		$(target).parent('div').prev('input').attr('type','password')
+    		$(target).find('i').addClass('fa-eye').removeClass('fa-eye-slash');
+	    }else{
+	    	$(target).removeClass('hide').addClass('show')
+    		$(target).parent('div').prev('input').attr('type','text')
+    		$(target).find('i').addClass('fa-eye-slash').removeClass('fa-eye');
+
+	    }
+	})
+	$('#reset-frm').submit(function(e){
+		e.preventDefault();
+		var formData = $('#reset-frm').serialize();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: formData,
+            beforeSend:function(){
+                $('#reset-err').html("Please Wait...");
+            },
+            success: function (response) {
+                $('#reset-err').html(response);
+            }
+        });
+        return false;
+	})
+	//student signup
+	$('#signup-form').submit(function(evt){
+        //alert("hello");
+        evt.preventDefault();
+        //new FormData($(this)[0])
+        var formData = $('#signup-form').serialize();
+        $.ajax({
+            url: site_url+'Student_corner/index',
+            type: 'POST',
+            data: formData,
+            // async: false,
+            // cache: false,                  
+            // processData: false,
+            beforeSend:function(){
+                $('#signup-err').html("Please Wait...");
+            },
+            success: function (response) {
+                
+                if($.trim(response)=='success')
+                {
+                     $('#Login').modal('hide');
+                     $('#thank-you-modal12').modal('show');   
+                     $('#signup-err').html("");
+                }
+                else
+                {
+                     $('#signup-err').html(response)
+                }
+            }
+        });
+        return false;
+    })
+	//student login
+    $('#login-data').submit(function(evt){
+        evt.preventDefault();
+        var formData = $('#login-data').serialize();
+        $.ajax({
+            url: site_url+'Student_corner/login',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	                window.location= site_url+'student/dashboard';
+	            }
+	            else
+	            {
+	                    $('#login_err').html(response);
+	            }
+	        }
+        });
+        return false;
+    })
+
+
+//Tags Show More - Show Less
+
+		  $(document).ready(function(){
+		  		//$('.foot-tags').append('');
+		        $('.show_more').click(function(){
+
+		            if($('.foot-tags').height() >= 90)
+		            {
+		                $('.foot-tags').toggleClass('show-foot-tags hide-foot-tags');
+
+		                if($('.foot-tags').hasClass('show-foot-tags'))
+		                {
+		                    $('.show_more').html("Show Less");
+		                }
+		                else
+		                {
+		                    $('.show_more').html("Show More");
+		                }
+		            }
+
+		        });
+
+
+		        $('.course_show_more').click(function(){
+		        	if ($(window).width() > 767)
+		            {
+			            if($('.course-tags').height() >= 300)
+			            {
+			                $('.course-tags').toggleClass('show-course-tags hide-course-tags');
+
+			                if($('.course-tags').hasClass('show-course-tags'))
+			                {
+			                    $('.course_show_more').html("Show Less");
+			                }
+			                else
+			                {
+			                    $('.course_show_more').html("Show More");
+			                }
+			            }
+			        }
+		            if ($(window).width() < 767)
+		            {
+			            if($('.course-tags').height() >= 90)
+			            {
+			                $('.course-tags').toggleClass('show-course-tags hide-course-tags');
+
+			                if($('.course-tags').hasClass('show-course-tags'))
+			                {
+			                    $('.course_show_more').html("Show Less");
+			                }
+			                else
+			                {
+			                    $('.course_show_more').html("Show More");
+			                }
+			            }
+		            }
+		            
+
+		        });
+
+		    });
+
+
+
+    $.googlePlaces = function(element, options) {
+
+        var defaults = {
+            placeId:        'ChIJUZ_UhHBP4DsRByw_ufv92yw', 
+            render:         ['reviews'], 
+            min_rating:     2, 
+            max_rows:       5, 
+            rotateTime:     false
+        };
+
+        var plugin = this;
+
+        plugin.settings = {}
+
+        var $element = $(element),
+            element = element;
+
+        plugin.init = function() {
+        plugin.settings = $.extend({}, defaults, options);
+        $element.html("<div id='the-reviews'></div>"); // create a plug for google to load data into
+        initialize_place(function(place){
+            plugin.place_data = place;
+            // render specified sections
+            if(plugin.settings.render.indexOf('reviews') > -1){
+            renderReviews(plugin.place_data.reviews);
+            if(!!plugin.settings.rotateTime) {
+                initRotation();
+            }
+            }
+        });
+        }
+
+        var initialize_place = function(c){
+        var map = new google.maps.Map(document.getElementById('the-reviews'));
+
+        var request = {
+            placeId: plugin.settings.placeId
+        };
+
+        var service = new google.maps.places.PlacesService(map);
+
+        service.getDetails(request, function(place, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+            c(place);
+            }
+        });
+        }
+
+        var sort_by_date = function(ray) {
+        ray.sort(function(a, b){
+            var keyA = new Date(a.time),
+            keyB = new Date(b.time);
+            // Compare the 2 dates
+            if(keyA < keyB) return -1;
+            if(keyA > keyB) return 1;
+            return 0;
+        });
+        return ray;
+        }
+
+        var filter_minimum_rating = function(reviews){
+        for (var i = reviews.length -1; i >= 0; i--) {
+            if(reviews[i].rating < plugin.settings.min_rating){
+                reviews.splice(i,1);
+            }
+        }
+        return reviews;
+        }
+
+        var renderReviews = function(reviews) {
+            reviews = sort_by_date(reviews);
+            reviews = filter_minimum_rating(reviews);
+            var html = "";
+            var row_count = (plugin.settings.max_rows > 0)? plugin.settings.max_rows - 1 : reviews.length - 1;
+            // make sure the row_count is not greater than available records
+            row_count = (row_count > reviews.length-1)? reviews.length -1 : row_count;
+            for (var i = row_count; i >= 0; i--) {
+                var stars = renderStars(reviews[i].rating);
+                var date = convertTime(reviews[i].time);
+                html = html+'<li class="comment_info" itemprop="review" itemscope itemtype="http://schema.org/Review"><div class="d-flex" ><div class="user_img"><img class="radius_all_5" src="'+reviews[i].profile_photo_url+'" alt="client_img1"></div><div class="comment_content"><div class="d-sm-flex align-items-center"><div class="meta_data"><h6><a href="#" itemprop="author">'+reviews[i].author_name+'</a></h6><div class="comment-time" itemprop="datePublished">'+date+'</div></div><div class="ml-auto mb-2">'+stars+'</div></div><meta itemprop="itemReviewed" content="http://schema.org/education"/><p itemprop="description">'+reviews[i].text+'</p></div></div></li>';
+                
+            };
+            $element.append(html);
+        }
+        
+        var initRotation = function() {
+        var $reviewEls = $element.children('.comment_info');
+        var currentIdx = $reviewEls.length > 0 ? 0 : false;
+        $reviewEls.hide();
+        if(currentIdx !== false) {
+            $($reviewEls[currentIdx]).show();
+            setInterval(function(){ 
+            if(++currentIdx >= $reviewEls.length) {
+                currentIdx = 0;
+            }
+            $reviewEls.hide();
+            $($reviewEls[currentIdx]).fadeIn('slow');
+            }, plugin.settings.rotateTime);
+        }
+        }
+
+        var renderStars = function(rating) {
+            var stars = '<div class="rating_stars" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><meta itemprop="worstRating" content="1"/><meta itemprop="ratingValue" content="' + rating + '"/><meta itemprop="bestRating" content="5"/>';
+          //  var stars = "<div class='review-stars' itemprop='reviewRating' itemscope itemtype='http://schema.org/Rating'><ul>";
+
+            // fill in gold stars
+            for (var i = 0; i < rating; i++) {
+                stars = stars+'<i class="ion-android-star"></i>';
+            };
+
+            // fill in empty stars
+            if(rating < 5){
+                for (var i = 0; i < (5 - rating); i++) {
+                    stars = stars+'<i class="ion-android-star-o"></i>';
+                };
+            }
+            stars = stars+"</div>";
+            return stars;
+        }
+
+        var convertTime = function(UNIX_timestamp) {
+            var a = new Date(UNIX_timestamp * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var time = months[a.getMonth()] + ' ' + a.getDate() + ', ' + a.getFullYear();
+            return time;
+        }
+
+        plugin.init();
+
+    }
+
+    $.fn.googlePlaces = function(options) {
+
+        return this.each(function() {
+        if (undefined == $(this).data('googlePlaces')) {
+            var plugin = new $.googlePlaces(this, options);
+            $(this).data('googlePlaces', plugin);
+        }
+        });
+
+    }
+
+})(jQuery);
+
+function share_fb(url) {
+  window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'facebook-share-dialog',"width=626, height=436")
+}
+function shareOntwitter(url){
+    var url = 'https://twitter.com/intent/tweet?url='+url+'&via=cdmi_multimedia&text=I would like to share';
+    TwitterWindow = window.open(url, 'Share on twitter',width=600,height=300);
+    return false;
+}
+function shareOnPinterest(url,description,img){
+     var url = "http://pinterest.com/pin/create/button/?url="+url+"&media="+img+"&description="+description;
+     window.open(url, 'Share on pinterest', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');
+     return false;
+}
+function shareOnLinkedin(url){
+     var url = "http://www.linkedin.com/shareArticle?mini=true&url="+url;
+     window.open(url, 'Share on linkedin', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');
+     return false;
+}
+function shareOnTumblr(url,title){
+     var url = "http://www.tumblr.com/share/link?url="+url+"&amp;title="+title;
+     window.open(url, 'Share on tumblr', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');
+     return false;
+}
+function loadMoreReviews(thisObj){
+	var next_offset = parseInt($('#next_offset').val());
+	var total_rows = parseInt($('#total_rows').val());
+	$.ajax({
+	    url: site_url+'course/get_ajax_reviews',
+	    method:"POST",
+	    data: {offset:next_offset},
+	    beforeSend:function(){
+	    	//nothing for now	
+	    },   
+	    success:function(data)
+	    {
+	    	$('#reivew-holder').append(data);
+	    	next_offset+=10;
+	    	$('#next_offset').val(next_offset);
+	    	if(next_offset>=total_rows){
+	    		$(thisObj).hide();
+	    	}
+	    }
+   });
+}
+
+//Student basic info
+
+  $('#basic_info1').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#basic_info1').serialize();
+             //alert(formData);
+                $.ajax({
+                	
+                    url: site_url+'Student_Dashboard/basic_info',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,                  
+                    processData: false,
+                    beforeSend:function(){
+                        $('#basic_info_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+                       
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                              $('#basic_info_err').html("");
+                        }
+                        else
+                        {
+                             $('#basic_info_err').show();
+                             $('#basic_info_err').html(response)
+                        }
+                    }
+                });
+                return false;
+            })
+
+//Student Contact info
+
+  $('#contact_info1').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#contact_info1').serialize();
+             //alert(formData);
+                $.ajax({
+                
+                    url: site_url+'Student_Dashboard/contact_info',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,                  
+                    processData: false,
+                    beforeSend:function(){
+                        $('#contact_info_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                              $('#contact_info_err').html("");
+                        }
+                        else
+                        {
+                        	$('#contact_info_err').show();
+                             $('#contact_info_err').html(response)
+                        }
+                    }
+                });
+                return false;
+            })
+
+//Student About me
+
+	
+  $('#about_me1').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#about_me1').serialize();
+             //alert(formData);
+                $.ajax({
+                		
+                    url: site_url+'Student_Dashboard/about_me',
+                    type: 'POST',
+                    data: formData,
+                    // async: false,
+                    // cache: false,                  
+                    // processData: false,
+                    beforeSend:function(){
+                        $('#about_me_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+    
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                             $('#about_me_err').html("");
+                        }
+                        else
+                        {
+                            
+                        	$('#about_me_err').show();
+                             $('#about_me_err').html(response)
+
+                        }
+                    }
+                });
+                return false;
+            })
+
+
+
+//Student Work experience
+
+   $('#work_experience1').submit(function(evt){
+	    evt.preventDefault();
+	    //new FormData($(this)[0])
+	    var formData = $('#work_experience1').serialize();
+	 //alert(formData);
+	    $.ajax({
+	    	
+	        url: site_url+'Student_Dashboard/work_experience',
+	        type: 'POST',
+	        data: formData,
+	        async: false,
+	        cache: false,                  
+	        processData: false,
+	        beforeSend:function(){
+	            $('#work_exp').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	         
+
+	            if($.trim(response)=='success')
+	            {
+	                 $('#thank-you-modal12').modal('show');   
+	                 $('#work_exp').html("");
+	            }
+	            else
+	            {
+	            	$('#work_exp').show();
+	                 $('#work_exp').html(response)
+	            }
+	        }
+	    });
+	    return false;
+	})
+   //delete work experience
+   $('.delete-experience').click(function(){
+   		var id = $(this).data('exp_id');
+   		var parentObj = $(this).parent('.work-experience-view')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_experience',
+	        type: 'POST',
+	        data: {'id':id},
+	        beforeSend:function(){
+	            $('#work_exp').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	parentObj.hide();
+	                $('#work_exp').html("").hide();
+	            }
+	            else
+	            {
+	                $('#work_exp').html(response).show();
+	            }
+	        }
+	    });
+   })
+
+
+//Student Work experience
+
+   $('#project_work_frm').submit(function(evt){
+	    evt.preventDefault();
+	    //new FormData($(this)[0])
+	    var formData = $('#project_work_frm').serialize();
+	 //alert(formData);
+	    $.ajax({
+	        url: site_url+'Student_Dashboard/project_work',
+	        type: 'POST',
+	        data: formData,
+	        async: false,
+	        cache: false,                  
+	        processData: false,
+	        beforeSend:function(){
+	            $('#project_err').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+            if($.trim(response)=='success')
+            {
+               $('#thank-you-modal12').modal('show');   
+               $('#project_err').html("");
+            }
+            else
+            {
+            	$('#project_err').show();
+              $('#project_err').html(response)
+            }
+	        }
+	    });
+	    return false;
+	})
+   //delete work experience
+   $('.delete-project').click(function(){
+   		var id = $(this).data('pro_id');
+   		var parentObj = $(this).parent('.project-link-view')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_project_work',
+	        type: 'POST',
+	        data: {'id':id},
+	        beforeSend:function(){
+	            $('#project_err').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	parentObj.hide();
+	                $('#project_err').html("").hide();
+	            }
+	            else
+	            {
+	                $('#project_err').html(response).show();
+	            }
+	        }
+	    });
+   })
+
+
+	//Student Educaion Detail
+    $('#edu_detail').submit(function(evt){
+        evt.preventDefault();
+        //new FormData($(this)[0])
+        var formData = $('#edu_detail').serialize();
+     //alert(formData);
+        $.ajax({
+        	
+            url: site_url+'Student_Dashboard/education_detail',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,                  
+            processData: false,
+            beforeSend:function(){
+                $('#edu_detail_err').html("Please Wait...").show();
+            },
+            success: function (response) {
+                
+
+                if($.trim(response)=='success')
+                {
+                     $('#thank-you-modal12').modal('show');   
+                     $('#edu_detail_err').html("");
+                }
+                else
+                {
+                	 $('#edu_detail_err').show();
+                     $('#edu_detail_err').html(response)
+                }
+            }
+        });
+        return false;
+    })
+    //delete education details
+   	$('.delete-education').click(function(){
+   		var id = $(this).data('edu_id');
+   		var parentObj = $(this).parent('.work-experience-view')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_education',
+	        type: 'POST',
+	        data: {'id':id},
+	        beforeSend:function(){
+	            $('#edu_detail_err').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	parentObj.hide();
+	                $('#edu_detail_err').html("").hide();
+	            }
+	            else
+	            {
+	                $('#edu_detail_err').html(response).show();
+	            }
+	        }
+	    });
+   	})
+   	//Student Extra Qualification
+    $('#extra_qualification_frm').submit(function(evt){
+        evt.preventDefault();
+        //new FormData($(this)[0])
+        var formData = $('#extra_qualification_frm').serialize();
+     //alert(formData);
+        $.ajax({
+        	
+            url: site_url+'Student_Dashboard/extra_qualification',
+            type: 'POST',
+            data: formData,
+            beforeSend:function(){
+                $('#extra_qualification_err').html("Please Wait...").show();
+            },
+            success: function (response) {
+                
+
+                if($.trim(response)=='success')
+                {
+                     $('#thank-you-modal12').modal('show');   
+                     $('#extra_qualification_err').html("");
+                }
+                else
+                {
+                	 $('#extra_qualification_err').show();
+                     $('#extra_qualification_err').html(response)
+                }
+            }
+        });
+        return false;
+    })
+    //delete education details
+   	$('.delete-extra').click(function(){
+   		var id = $(this).data('extra_id');
+   		var parentObj = $(this).parent('.work-experience-view')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_extra_qualification',
+	        type: 'POST',
+	        data: {'id':id},
+	        beforeSend:function(){
+	            $('#extra_qualification_err').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	parentObj.hide();
+	                $('#extra_qualification_err').html("").hide();
+	            }
+	            else
+	            {
+	                $('#extra_qualification_err').html(response).show();
+	            }
+	        }
+	    });
+   	})
+	//Student Language Known
+
+     $('#lang_known').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#lang_known').serialize();
+             //alert(formData);
+                $.ajax({
+                    url: site_url+'Student_Dashboard/language_known',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,                  
+                    processData: false,
+                    beforeSend:function(){
+                        $('#lang_known_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+                       
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                             $('#lang_known_err').html("");
+                        }
+                        else
+                        {
+                        	$('#lang_known_err').show();
+                             $('#lang_known_err').html(response)
+                        }
+                    }
+                });
+                return false;
+            })
+    //delete language details
+   	$('.delete-language').click(function(){
+   		var id = $(this).data('lan_id');
+   		var parentObj = $(this).parent('.work-experience-view')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_language',
+	        type: 'POST',
+	        data: {'id':id},
+	        beforeSend:function(){
+	            $('#lang_known_err').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	parentObj.hide();
+	                $('#lang_known_err').html("").hide();
+	            }
+	            else
+	            {
+	                $('#lang_known_err').html(response).show();
+	            }
+	        }
+	    });
+   	})
+
+//Student Skill
+
+      $('#add_skill').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#add_skill').serialize();
+             //alert(formData);
+                $.ajax({
+
+                    url: site_url+'Student_Dashboard/skill',
+                    type: 'POST',
+                    data: formData,
+                    
+                    beforeSend:function(){
+                        $('#skill_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                             $('#skill_err').html("");
+                        }
+                        else
+                        {
+                        	 $('#skill_err').show();
+                             $('#skill_err').html(response)
+                        }
+                    }
+                });
+                return false;
+            })
+
+
+//Student Social Presence
+
+        $('#social_precence1').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#social_precence1').serialize();
+             //alert(formData);
+                $.ajax({
+                    url: site_url+'Student_Dashboard/social_precence',
+                    type: 'POST',
+                    data: formData,
+                    beforeSend:function(){
+                        $('#social_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                             $('#social_err').html("");
+                        }
+                        else
+                        {
+                        	 $('#social_err').show();
+                             $('#social_err').html(response)
+                        }
+                    }
+                });
+                return false;
+            })
+    //delete social details
+   	$('.delete-social').click(function(){
+   		var id = $(this).data('soc_id');
+   		var parentObj = $(this).parent('.work-experience-view')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_social',
+	        type: 'POST',
+	        data: {'id':id},
+	        beforeSend:function(){
+	            $('#social_err').html("Please Wait...").show();
+	        },
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	parentObj.hide();
+	                $('#social_err').html("").hide();
+	            }
+	            else
+	            {
+	                $('#social_err').html(response).show();
+	            }
+	        }
+	    });
+   	})
+
+//Student Personal Detail
+
+         $('#personal_detail1').submit(function(evt){
+               
+                evt.preventDefault();
+                //new FormData($(this)[0])
+                var formData = $('#personal_detail1').serialize();
+             //alert(formData);
+                $.ajax({
+                    url: site_url+'Student_Dashboard/personal_detail',
+                    type: 'POST',
+                    data: formData,
+                  
+                    beforeSend:function(){
+                        $('#personal_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+                       
+                        if($.trim(response)=='success')
+                        {
+                             $('#thank-you-modal12').modal('show');   
+                             $('#personal_err').html("");
+                        }
+                        else
+                        {
+                        	 $('#personal_err').show();
+                             $('#personal_err').html(response)
+                        }
+                    }
+                });
+                return false;
+            })
+
+
+        //Student Work upload
+
+            $('#work_up').submit(function(evt){
+                //alert("hello");
+                $('#work_err').html("Please Wait...").show();
+                evt.preventDefault();
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    url: site_url+'Student_Dashboard/work_upload',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    beforeSend:function(){
+                        $('#work_err').html("Please Wait...").show();
+                    },
+                    success: function (response) {
+                        if($.trim(response)=='success')
+                        {
+                             $('#addwork').modal('hide');
+                             $('#thank-you-modal12').modal('show');   
+                             $('#work_err').html("").hide();
+                        }
+                        else
+                        {
+                             $('#work_err').html(response).show();
+                        }
+                    }
+                });
+                return false;
+            })
+    //delete project work
+   	$('.work_delete').click(function(){
+   		var id = $(this).data('project_id');
+   		var parentObj = $(this).parents('.work_box_card')
+   		 $.ajax({
+	        url: site_url+'Student_Dashboard/delete_project',
+	        type: 'POST',
+	        data: {'id':id},
+	        success: function (response) {
+	            if($.trim(response)=='success')
+	            {
+	            	window.location.reload();
+	                
+	            }
+	            else
+	            {
+	                alert("project not deleted.");
+	            }
+	        }
+	    });
+   	})
+
+
+//student Get Topic
+
+
+    $(document).ready(function(e){
+          $(".soft").change(function(){  
+
+                     $.ajax({  
+
+                        url:site_url+'Student_Dashboard/get_topic',  
+
+                        data: {
+
+                            id:$(this).val()
+
+                            },  
+
+                        type: "POST",  
+
+                        dataType:"json",
+
+                        success:function(data){  
+
+                        $(".topic1").html(data.retHtml);  
+
+                     }  
+
+                  });  
+
+               });  
+    })
+
+
+
+    $('#job_switch12').change(function()
+    {
+    	if($('#job_switch12').prop("checked")==true)
+    	{
+    		$('#apply-for-job').modal('show');
+    	}else{
+    		$.ajax({  
+				url:site_url+'Student_Dashboard/allow_resume',  
+				data: {status:"0"},  
+				type: "POST",  
+				success:function(res){  
+					$('#job_info').html("Your Job Status is Update Successfully....!");
+					$('#thank-you-modal_job').modal('show');
+				}  
+			});  
+    	}	
+	})
+    $('#job_prefs_frm').submit(function(evt){
+        evt.preventDefault();
+        var formData = $('#job_prefs_frm').serialize();
+        $.ajax({
+            url: site_url+'Student_Dashboard/allow_resume',
+            type: 'POST',
+            data: formData,
+            beforeSend:function(){
+                $('#job_err').html("Please Wait...").show();
+            },
+            success: function (response) {
+                if($.trim(response)=='success')
+                {
+                     $('#apply-for-job').modal('hide');
+                     $('#job_info').html("Your Job Status is Update Successfully....!");
+                     $('#thank-you-modal_job').modal('show');  
+                     $('#job_err').html("").hide();
+                }
+                else
+                {
+                     $('#job_err').html(response).show();
+                }
+            }
+        });
+        return false;
+    })
+
+	function check_job()
+	{
+			$('#job_info').html("You are not able Do Job");
+            $('#thank-you-modal_job').modal('show');
+	}
+function get_b_data(id) 
+    {
+        $.ajax({  
+
+                        url:site_url+"About/get_business_detail",  
+
+                        data: {
+
+                            id:id
+
+                            },  
+
+                        type: "POST",  
+
+                        dataType:"json",
+
+                        success:function(data){  
+
+                            //alert(data.retHtml);
+                        $(".det").html(data.retHtml);  
+                        $("#student_company_details").modal('show');
+
+                     }  
+
+                  });  
+
+              
+    }
+$(document).ready(function(){
+ 
+    
+    $('.student_company').on('scroll', function() {
+        // var position = $('.student_company').scrollTop();
+        // var bottom = $(document).height() - $(window).height();
+
+        //if( position == bottom ){
+        let div = $(this).get(0);
+        if(div.scrollTop + div.clientHeight >= div.scrollHeight) {
+            var row = Number($('#row').val());
+            var allcount = Number($('#all').val());
+            row = row + rowperpage;
+            if(row <= allcount){
+                $('#row').val(row);
+                $.ajax({
+                    url: site_url+'about/get_more_business_students',
+                    type: 'post',
+                    data: {row:row},
+                    success: function(response){
+                        $(".bus_post:last").after(response).show().fadeIn("slow");
+                    }
+                });
+            }
+        }
+
+    });
+
+});
+//student profile pic upload and crop start
+if (typeof is_stud_dashboard != 'undefined' && is_stud_dashboard =="yes") { 
+$uploadCrop = $('#upload-student-pic').croppie({
+    enableExif: true,
+    enableOrientation:true,
+    viewport: {
+        width: 350,
+        height: 350,
+        type: 'square'
+    },
+    boundary: {
+        width: 400,
+        height: 400
+    }
+});
+$(function() {
+  $('.vanilla-rotate').on('click', function(ev) {
+        $uploadCrop.croppie('rotate', parseInt($(this).data('deg')));
+    });
+});
+$('#student-img').on('change', function () { 
+	var name = document.getElementById("student-img").files[0].name;
+  	var ext = name.split('.').pop().toLowerCase();
+  	if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1) 
+  	{
+   		alert("Invalid Image File");
+   		return false;
+  	}
+  	var reader = new FileReader();
+	$('#profile-pic-crop').modal('show');
+    
+    reader.onload = function (e) {
+        $uploadCrop.croppie('bind', {
+            url: e.target.result
+        }).then(function(){
+            console.log('jQuery bind complete');
+        });
+            
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+     
+$('.save-image').on('click', function (ev) {
+    var $that = $(this);
+    $uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+    }).then(function (resp) {
+        $.ajax({
+            url: site_url+"Student_Dashboard/student_img",
+            type: "POST",
+            data: {"image":resp},
+            beforeSend:function(){
+                $('#save-img-msg').html("Please Wait...").show();
+                $that.attr("disabled",true);
+            },
+            success: function (data) {
+                $('#save-img-msg').html("").hide();
+                $that.attr("disabled",false);
+                if(data.trim()=="success"){
+                	$('#user-img').attr('src',resp);
+					$('#profile-pic-crop').modal('hide');
+					$('#thank-you-modal12').modal('show');
+                }else{
+                	$('#save-img-msg').html(data).show();
+                }
+            }
+        });
+    });
+});
+}
+//student profile pic upload and crop end
+$('#college_course').change(function(){
+	var course_name = $(this).val();
+	$('input[name="product_info"]').val(course_name+' Tution Fees');
+})

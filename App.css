@@ -1,0 +1,575 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.spacery
+  {
+    padding: 80px 0;
+  }
+  .w-33{
+    width: 33%;
+  }
+  .flex_wrap{
+    flex-wrap: wrap;
+  }
+
+/* ==========================================TOP-MENU START========================================= */
+.container{
+  width: 75%;
+  margin: auto;
+}
+.container2{
+  width: 65%;
+  margin: auto;
+}
+.d_flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-menu{
+  background-color: #003366;
+  color: white;
+  padding: 10px 0;
+}
+.top-text{
+  margin-left: 7px;
+}
+.top-right{
+  margin-right:7px;
+}
+.top-icon{
+  margin-left: 5px;
+}
+.top-middile{
+  margin-right: 10%;
+}
+/* ==========================================TOP-MENU END========================================= */
+
+/* ==========================================MAIN-MENU START========================================= */
+.main-left img{
+  width: 230px;
+}
+.main-menu{
+  padding: 13px 0;
+}
+.main-right ul li {
+  text-decoration: none;
+  list-style: none;
+}
+.main-right ul li{
+  font-weight: bold;
+  margin-left: 33px;
+  position: relative;
+  font-size: 15px;
+}
+.main-icon{
+  font-size: 22px;
+  position: absolute;
+  left: 100%;
+  top: 2%;
+}
+.main-student{
+  margin-right: 15px;
+}
+
+/* ==========================================TOP-MENU END========================================= */
+.slider-img{
+  width: 100%;
+}
+
+/* ==========================================OFFERED COURCE SECTION START================================ */
+.offered-p{
+  text-align: center;
+  position: relative;
+}
+.offered-div{
+  height: 4px;
+  width: 30px;
+  background-color: #FFBC06;
+  position: absolute;
+  right: 57%;
+  top: 40%;
+}
+.offered h1{
+  text-align: center;
+  color: #4c4a4a;
+  margin-top: 20px;
+  letter-spacing: 4px;
+  margin-right: 10px;
+  margin-bottom: 35px;
+}
+.offered-div2{
+  flex-wrap: wrap;
+  width: 100%;
+}
+.offered-div2 h2{
+  padding: 10px 8px;
+  font-size: 20px;
+  color: rgb(52, 47, 47);
+  border-left: 1px solid rgb(219, 207, 207);
+  border-right: 1px solid  rgb(219, 207, 207);
+  /* border-top: 1px solid  rgb(219, 207, 207); */
+
+}
+
+.offered-div2 div img{
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+}
+.offered-bottom i {
+  color: rgb(209, 180, 35);
+  font-size: 22px;
+  margin-top: 20px;
+}
+.offered-bottom{
+  border: 1px solid rgb(219, 207, 207);
+  /* border-radius: 20px; */
+  margin-bottom: 30px;
+  padding: 18px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+   /* border-top: 0px; */
+  
+}
+.offered-bottom button{
+  background-color: #0D3D6E;
+  color: white;
+  padding: 10px 13px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.offeref-last{
+  margin: 50px 0 0 50%;
+  transform: translateX(-50%);
+  background-color: #FFBC06;
+  padding: 20px 50px 20px 30px;
+  border: none;
+  color: white;
+  font-size: 15px;
+  position: relative;
+  border-radius: 10px;
+}
+.offeref-last i{
+  font-size: 30px;
+  position: absolute;
+  top: 27%;
+  right: 7%;
+}
+/* ==========================================OFFERED COURCE SECTION END================================ */
+
+ /* ===================================ABOUT US SECTION START ============================================ */
+.aboutus{
+  width: 100%;
+  position: relative;
+  height: 600px;
+}
+.about-left{
+  position: absolute;
+  width:52%;
+  padding: 80px;
+  border-bottom-right-radius:250px;
+  border-top-right-radius: 250px;
+  box-shadow: 0px 0px 6px #a7a190;
+  background-color: white;
+  z-index: 1;
+  
+}
+.about-p{
+  position: relative;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+.about-div{
+  height: 3px;
+  width: 25px;
+  background-color: #FFBC06;
+  position: absolute;
+  left: -35px;
+  top: 40%;
+}
+.about-last{
+  background-color: #FFBC06;
+  padding: 20px 35px 20px 30px;
+  border: none;
+  color: white;
+  font-size: 15px;
+  position: relative;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+.aboutus h3{
+  margin-bottom: 20px;
+}
+.aboutus .about-pp{
+  font-size: 15px;
+  color: #676363;
+  text-align: justify;
+  line-height: 25px;
+}
+.about-right{
+  width: 42%;
+  position: absolute;
+  right: 0;
+  object-fit: cover;
+}
+.about-right img{
+  width: 100%;
+  height: 100%;
+  margin-top: 35px;
+  position: relative;
+}
+.about-div2{
+  position: absolute;
+  top: 8%;
+  left: 0;
+  width: 100%;
+  height: 91%;
+  /* margin-top: 35px; */
+  background-color: rgba(8, 19, 52, 0.5)
+  /* z-index: 2; */
+}
+.about-right i{
+  padding: 10px 15px 8px 15px;
+  position: absolute;
+  color: #FFBC06;
+  font-size: 30px;
+  top: 47%;
+  left: 50%;
+  background-color: white;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+ /* ===================================ABOUT US SECTION END ============================================ */
+
+
+ /* ==================================== KEYBOARDSECTION START========================================== */
+ .keyboard{
+  background-image: linear-gradient(rgba(19, 41, 65, 0.8),rgba(11,25,40,.8)),url(image/keyboard.jpeg);
+  height: 250px;
+  background-position: center;background-size: cover;
+  color: white;
+  text-align: center;
+ }
+ .keyboard img{
+  height: 80px;
+  width: 80px;
+  margin-top: 40px;
+ }
+ .keyboard h1{
+  margin: 10px 0;
+ }
+
+ /* ====================================KEYBOARD SECTION END============================================= */
+ /* ====================================HAPPY STUDENT SECTION START=================================== */
+ .happy{
+  /* width: 50%; */
+ }
+ .happy-left{
+  width: 50%;
+ }
+ .happy-left p{
+  text-align: justify;
+  margin-right: 10px;
+  color: #676363;
+
+ }
+ .happy h1{
+  color: #3c3939;
+ }
+ .h-quotes{
+  font-size: 100px;
+  color: #bfbfbf;
+ }
+ .happy-flex{
+  margin-top: 25px;
+ }
+ .h-flex-right i{
+  font-size: 20px;
+  padding: 8px 10px;
+  border: 1px solid rgb(204, 199, 199);
+  box-shadow: 0 0 10px  rgb(204, 199, 199);
+  margin-right: 10px;
+ }
+ .happy-bottom{
+  width: 70%;
+ }
+ .happy-b1{
+  width: 20%;
+ }
+ .happy-b2{
+  width: 80%;
+ }
+ 
+ .happy-left img{
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  margin-top: 30px;
+  margin-right: 50px;
+  /* width: 30%; */
+ }
+ 
+ .happy-left h4{
+  color: #0a56a1;
+ }
+
+ .happy-right{
+  width: 50%;
+  position: relative;
+
+ }
+ .happy-right img{
+  width: 90%;
+  margin-top: 25px;
+  margin-left: 50px;
+ }
+ 
+ .happy2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 30px;
+
+ }
+ /* ====================================HAPPY STUDENT SECTION END=================================== */
+
+ 
+ /* ====================================READ OUR DIFFERENCE SECTION START====================================== */
+
+ .read-bg{
+  background-color: #F7F7F7;
+}
+
+.read .line{
+  height: 3px;
+  width: 20px;
+  background-color: orange;
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  margin-right: 10px;
+}
+
+.read-head
+{
+  text-align: center;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.read h1{
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.read-img{
+  margin-top: 50px;
+}
+
+.read-1{
+  position: relative;
+  margin: 15px;
+  width: calc(33% - 30px);
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0,0.8);
+  padding: 20px 0;
+} 
+
+.read-1 img{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  transform: translateX(-50%);
+}
+
+.read-1 h3{
+  margin-top: 160px;
+  text-align: center;
+}
+
+.read-1 p{
+  text-align: center;
+  color: #888888;
+  margin-top: 15px;
+  padding: 0px 30px 40px 30px;
+}
+
+.read1 img{
+  background-color: #F6475F;
+}
+
+.read2 img{
+  background-color: #FFBC06;
+}
+
+.read3 img{
+  background-color: #B3D369;
+}
+
+.read4 img{
+  background-color: #554DA7;
+}
+
+.read5 img{
+  background-color: #4382FF;
+}
+
+.read6 img{
+  background-color:#F94FA4;
+}
+
+ /* ====================================READ OUR DIFFERENCE SECTION END====================================== */
+ /* ====================================STUDENT PLACEMENT SECTION START====================================== */
+ .student-place-p{
+  text-align: center;
+  position: relative;
+}
+ .student-place-div{
+  height: 4px;
+  width: 30px;
+  background-color: #FFBC06;
+  position: absolute;
+  right: 57.5%;
+  top: 40%;
+}
+.student-place h1{
+  text-align: center;
+  color: #4c4a4a;
+  margin-top: 20px;
+  letter-spacing: 4px;
+  margin-right: 10px;
+  margin-bottom: 35px;
+}
+ .req{
+  width: 16.66%;
+  border: 1px solid rgb(160, 149, 149);
+  margin: 15px;
+  padding: 5px;
+ }
+ .req img{
+  width: 100%;
+  height: 70px;
+  object-fit: cover;
+ }
+
+ .ancore a{
+  padding: 3px;
+  margin: 2px;
+  border: 1px solid rgb(174, 172, 172);
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+ }
+ .ancore{
+  display: flex;
+ }
+ .student-place h2{
+  margin: 20px 0;
+ }
+ .student-place h3{
+  margin: 20px 0;
+
+ }
+ .slider2 .item{
+  border: 1px solid rgb(109, 109, 109);
+  margin: 40px 0;
+ }
+ 
+ /* ================================STUDENT PLACEMENT SECTION END========================================= */
+
+ /* ================================================FOOTER START========================================= */
+ .footer{
+  background-color: #003366;
+ }
+ .footer2{
+  display: flex;
+  color: white;
+ }
+ .footer-left
+ {
+  width: 30%;
+ }
+ .footer-left img{
+  width: 70%;
+ }
+ .footer-left p{
+  color: white;
+  text-align: justify;
+  margin: 20px 10px 20px 0;
+ }
+ .footer-left h3{
+  color: #EFBC06;
+ }
+ .footer_flex{
+  display: flex;
+  color: white;
+ }
+ .footer-icon{
+  background-color: #1A4876;
+  padding: 5px;
+  margin-top: 20px;
+  margin-right: 5px;
+  border-radius: 7px;
+
+ }
+ .footer-center
+ {
+  width: 30%;
+  margin-left: 40px;
+ }
+ .footer-right h4{
+  color: #EAA800;
+  margin: 20px 0 10px 0;
+ }
+ .footer-right p{
+  line-height: 25px;
+  margin-bottom: 10px;
+ }
+ .footer-center{
+  margin-left: 30px;
+ }
+ .footer-center ul li{
+  list-style: none;
+  margin: 20px 20px 9px 0px;
+
+ }
+ .footer-center ul li i{
+  margin-right: 10px;
+ }
+ .footer-right ul li{
+  list-style: none;
+  margin: 20px 20px 9px 10px;
+
+ }
+ .footer-right ul li i{
+  margin-right: 10px;
+ }
+ .footer-right
+ {
+  width: 40%;
+ }
+ .lastsec{
+  background-color: #072044;
+  color: white;
+    padding: 40px 0;
+ }
+ /* ================================================FOOTER END========================================= */
+
+
+
+
+
+
